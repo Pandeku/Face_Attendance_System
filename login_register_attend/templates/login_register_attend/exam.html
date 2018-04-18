@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %}考试登陆{% endblock %}
+{% block content %}
+
+    <div class="container">
+        {% if message %}
+            <div class="alert alert-warning">{{ message }}</div>
+        {% endif %}
+        <div class="col-md-4 col-md-offset-4">
+            <form action="/exam/" method="post">
+
+                {% csrf_token %}
+
+                <div class="form-inline">
+                    <div class="form-group">
+                        <label for="Exam_Name">考场：</label>
+                        <input type="text" class="form-control" id="Exam_Name" name="Exam_Name" placeholder="考场"
+                               autofocus
+                               required/>
+
+                    </div>
+                </div>
+
+                <div class="form-inline">
+                    <div class="form-group">
+                        <label for="Exam_Passwd">密码：</label>
+                        <input type="text" class="form-control" id="Exam_Password" name="Exam_Password" placeholder="考场"
+                               autofocus
+                               required/>
+                        <button type="submit" class="btn btn-primary pull-right">提交信息</button>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div> <!-- /container -->
+{% endblock %}
+
+

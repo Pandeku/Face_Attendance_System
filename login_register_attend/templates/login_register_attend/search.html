@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %}查询信息{% endblock %}
+{% block content %}
+
+
+
+    <form action="/search/" method="post">
+        {% csrf_token %}
+        <div class="col-md-4 col-md-offset-4 ">
+            <div class="form-inline">
+                <div class="form-group">
+                    <label for="Student_ID">查询的学号：</label>
+                    <input type="text" class="form-control" id="Student_ID" name="Student_ID" placeholder="学号" autofocus
+                           required/>
+                    <button type="submit" class="btn btn-primary pull-right">提交信息</button>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <div class="container">
+        <div class="col-xs-12">
+            <form action="/search/" method="post">
+                {% if message %}
+                    <div class="alert alert-warning">{{ message }}</div>
+                {% endif %}
+                {% csrf_token %}
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>记录信息</th>
+                        <th>班级</th>
+                        <th>学号</th>
+                        <th>考场地点</th>
+                        <th>姓名</th>
+                        <th>考场座位号</th>
+                        <th>考试时间</th>
+                        <th>是否签到</th>
+                        <th>是否注册人脸</th>
+                        <th>最后签到时间</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>人脸库</td>
+                        <td>{{ " " }}</td>
+                        <td>{{ Student_Id }}</td>
+                        <td>{{ Exam_Name }}</td>
+                        <td>{{ Student_Name }}</td>
+                        <td>{{ "" }}</td>
+                        <td>{{ " " }}</td>
+                        <td>{{ " " }}</td>
+                        <td>{{ " " }}</td>
+                        <td>{{ " —" }}</td>
+                    </tr>
+                    {% for name in Person %}
+                        <tr>
+                            <td> 签到表</td>
+                            <td>{{ name.Class_Name }}</td>
+                            <td>{{ name.User_Id }}</td>
+                            <td>工2-{{ name.Exam_Site }}</td>
+                            <td>{{ name.User_Name }}</td>
+                            <td>{{ name.Exam_Number }}</td>
+                            <td>{{ name.Exam_Time }}</td>
+                            <td>{{ name.Is_Attend }}</td>
+                            <td>{{ name.Is_Add_Face }}</td>
+                            <td>{{ name.Attend_Time }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </form>
+        </div>
+
+    </div> <!-- /container -->
+{% endblock %}
+
+

@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %}登录{% endblock %}
+{% block css %}
+    <link href="{% static 'css/login.css' %}" rel="stylesheet"/>{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                {% if message %}
+                    <div class="alert alert-warning">{{ message }}</div>
+                {% endif %}
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>班级</th>
+                        <th>学号</th>
+                        <th>考场地点</th>
+                        <th>姓名</th>
+                        <th>考场座位号</th>
+                        <th>考试时间</th>
+                        <th>是否签到</th>
+                        <th>是否注册人脸</th>
+                        <th>最后签到时间</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for name in names %}
+                        <tr>
+                            <td>{{ name.Class_Name }}</td>
+                            <td>{{ name.User_Id }}</td>
+                            <td>工2-{{ name.Exam_Site }}</td>
+                            <td>{{ name.User_Name }}</td>
+                            <td>{{ name.Exam_Number }}</td>
+                            <td>{{ name.Exam_Time }}</td>
+                            <td>{{ name.Is_Attend }}</td>
+                            <td>{{ name.Is_Add_Face }}</td>
+                            <td>{{ name.Attend_Time }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div><!-- /.col-lg-6 -->
+            <div class="col-lg-6">
+                <form class='form-login' action="/login/" method="post">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <video width="350" height="300"></video>
+                        <canvas width="350" height="300"></canvas>
+                        <input type="hidden" id="Face" name="Face">
+
+                    </div>
+                    <div class="form-inline">
+                        <div class="form-group">
+                            <button type="button" style="width: 130px;height: 45px" id="snap"
+                                    class="btn btn-default pull-left">拍照
+                            </button>
+                            <button type="submit" style="width: 170px;height: 45px" class="btn btn-primary pull-right">
+                                提交照片
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div> <!-- /container -->
+
+{% endblock %}

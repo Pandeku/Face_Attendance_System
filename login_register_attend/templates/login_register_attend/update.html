@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %}考试登陆{% endblock %}
+{% block content %}
+    <div class="container">
+        {% if message %}
+            <div class="alert alert-warning">{{ message }}</div>
+        {% endif %}
+        <form action="/update/" method="post">
+            {% csrf_token %}
+            <div class="col-md-4 col-md-offset-4 ">
+                <div class="form-inline">
+                    <div class="form-group">
+                        <label for="Student_ID">删除人脸库中人脸，请输入学号：</label>
+                        <input type="text" class="form-control" id="Student_ID" name="Student_ID" placeholder="学号"
+                               autofocus
+                               required/>
+                        <button type="submit" class="btn btn-primary pull-right">提交信息</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div> <!-- /container -->
+{% endblock %}
+
+

@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %}注册{% endblock %}
+{% block content %}
+    <div class="container">
+        {% if message %}
+            <div class="alert alert-warning">{{ message }}</div>
+        {% endif %}
+        <div class="row">
+            <div class="col-lg-6">
+                <form action="/register/" method="post">
+                    {% csrf_token %}
+                    {#                    <div class="col-md-4 col-md-offset-4 ">#}
+                    <div class="form-inline" style="width: auto;">
+                        <div class="form-group">
+                            <label for="User_Id">学号：</label>
+                            <input type="text" class="form-control" id="User_Id" name="User_Id" placeholder="学号"
+                                   autofocus required/>
+                            <button type="button" id="snap" class="btn btn-default">拍照</button>
+                            <button type="submit" class="btn btn-primary pull-right">提交</button>
+                        </div>
+                        <canvas width="350" height="280"></canvas>
+                        <input type="hidden" id="Face" name="Face">
+                    </div>
+                    {#                    </div>#}
+                </form>
+            </div><!-- /.col-lg-6 -->
+            <div class="col-lg-6">
+                <video width="360" height="300"></video>
+            </div>
+        </div>
+    </div>
+    <!-- /container -->
+{% endblock %}
+
