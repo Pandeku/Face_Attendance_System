@@ -26,7 +26,8 @@ urlpatterns = [
     url(r'^logout/', views.logout),
     url(r'^exam/', views.exam),
     url(r'^search/', views.search),
-    url(r'^update/', views.update)
+    url(r'^update/', views.update),
+    url(r'^test/', views.test),
 ]
 
 handler400 = views.bad_request

@@ -5,16 +5,11 @@ from .models import User
 from django.shortcuts import render, redirect
 import base64
 from aip import AipFace
+# 正式key
+APP_ID = '11155090'
+API_KEY = "rG3P2789bywKHfGN0OnEwAgg"
+SECRET_KEY = "yTjcZQ92dwGBl3zDY1yWzEz9fb4FeYMc"
 
-# #基于人脸识别的出勤系统 验证
-# APP_ID = '10924752'
-# API_KEY = 'rcnNzw3lty5tIj0qSqjGKjMu'
-# SECRET_KEY = 'DcBm8pAuyaD6QaXAWOMyGCS7tFt7gdAy'
-
-# # 系统测试应用
-APP_ID = '11041253'
-API_KEY = 'VYtF8vGIdFrfVTUk8GwBr9yh'
-SECRET_KEY = '19UBQXeCtLwv6Ea48ugSsaNGt9jU2yKK'
 client = AipFace(APP_ID, API_KEY, SECRET_KEY)
 
 # Create your views here.
@@ -48,16 +43,19 @@ def test(request):
         }
         """ 带参数调用人脸识别 """
         Res = client.identifyUser(Group_Id, image, options)
-        scores = str(Res['result'][0]['scores'][0])
-        if float(Res['ext_info']['faceliveness']) < 0.0000003241:
-            message = 'Error: face biopsy failed. Please take photos again.!'
-            return render(request, 'login_register_attend/test.html', locals())
+        print(Res)
+        if 'error_msg' in Res:
+            message = "fail!"
         else:
-            if Res['result'][0]['scores'][0] > 78:  # 人脸识别分数
-                message = Res['result'][0]['uid'] + '，Scores:' + scores + ",   success!"
+            if float(Res['ext_info']['faceliveness']) < 0.0000003241:
+                message = 'Error: face biopsy failed. Please take photos again.!'
                 return render(request, 'login_register_attend/test.html', locals())
             else:
-                message = Res['result'][0]['uid'] + '，Scores:' + scores + ",    fail!"
+                if Res['result'][0]['scores'][0] > 78:  # 人脸识别分数
+                    message = '，Scores:'",   success!"
+                else:
+                    msg = str(Res['result'][0]['uid'])
+                    message = "EORRR"
                 return render(request, 'login_register_attend/test.html', locals())
     return render(request, 'login_register_attend/test.html', locals())
 
@@ -88,7 +86,6 @@ def index(request):
 def update(request):
     if request.method == "POST":
         Student_ID = request.POST.get("Student_ID")  # 人脸库信息
-        print(Student_ID)
         Res = client.deleteUser(Student_ID)
         models.User.objects.filter(User_Id=Student_ID).update(Is_Add_Face='未注册！')
         models.User.objects.filter(User_Id=Student_ID).update(Is_Attend='未签到！')
@@ -131,11 +128,8 @@ def login(request):
                 "user_top_num": 1
             }
             """ 带参数调用人脸识别 """
-            try:
-                Res = client.identifyUser(Group_Id, image, options)
-                print(Res)
-            except:
-                return render(request, 'login_register_attend/login.html', locals())
+            Res = client.identifyUser(Group_Id, image, options)
+
             if 'error_msg' in Res:
                 message = 'Please register face first！'  # 返回登陆页面
                 return render(request, 'login_register_attend/login.html', locals())
