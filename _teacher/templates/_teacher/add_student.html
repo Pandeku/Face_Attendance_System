@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %}添加学生{% endblock %}
+{% block css %}
+    <link href="{% static 'css/login.css' %}" rel="stylesheet"/>{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="col-md-4 col-md-offset-4 ">
+            <form class='form-login' action="/_teacher/add_student/" method="post">
+                {% if message %}<div class="alert alert-warning">{{ message }}</div>{% endif %}
+                {% csrf_token %}
+              <h2 align="center">添加学生</h2>
+                <div class="input-group">
+                    <span class="input-group-addon" id="basic-addon1" ><b>学生信息</b></span>
+                    <input type="text" class="form-control" placeholder="学号" id="student_id" name="student_id" aria-describedby="basic-addon1" autofocus required>
+                    <input type="text" class="form-control" placeholder="姓名" id="student_name" name="student_name" aria-describedby="basic-addon1" autofocus required>
+                    <input type="text" class="form-control" placeholder="班级" id="student_class" name="student_class"  aria-describedby="basic-addon1"  >
+                    <input type="text" class="form-control" placeholder="考试时间" id="test_time" name="test_time" aria-describedby="basic-addon1"  >
+                    <input type="text" class="form-control" placeholder="考场" id="test_site" name="test_site" aria-describedby="basic-addon1" autofocus required>
+                    <input type="text" class="form-control" placeholder="考场座位号" id="test_number" name="test_number" aria-describedby="basic-addon1"  >
+                </div>
+                <button type="reset" class="btn btn-default btn-lg"  >重置</button>
+                <button type="submit" class="btn btn-primary btn-lg pull-right" >提交</button>
+            </form>
+        </div>
+
+    </div><!--/.col-xs-12.col-sm-9-->
+
+{% endblock %}
+

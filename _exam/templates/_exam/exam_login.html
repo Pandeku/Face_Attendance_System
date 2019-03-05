@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %}考场登陆{% endblock %}
+{% block css %}
+    <link href="{% static 'css/exam.css' %}" rel="stylesheet"/>{% endblock %}
+{% block content %}
+    <div class="container">
+        {% if message %}<div class="alert alert-warning">{{ message }}</div>{% endif %}
+        <form class="form-signin" action="/_exam/exam_login/" method="post">
+            {% csrf_token %}
+            <h2 class="form-signin-heading" align="center">考 场 登 陆</h2>
+            <label for="Exam_Name" class="sr-only"> </label>
+            <input type="text" id="Exam_Name" name="Exam_Name" class="form-control" placeholder="考场/13_201" required="" autofocus="">
+            <label for="inputPassword" class="sr-only">Password</label>
+            <input type="password" id="Exam_passed" name="Exam_passed" class="form-control" placeholder="密码/13_201" required="">
+            <div class="checkbox">
+                <label><input type="checkbox" value="remember-me"> 记住账号</label>
+            </div>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">登陆</button>
+        </form>
+    </div> <!-- /container -->
+{% endblock %}
+
+

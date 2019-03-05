@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %}{% endblock %}
+{% block css %}
+    <link href="{% static 'css/login.css' %}" rel="stylesheet"/>{% endblock %}
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                {% if message %}<div class="alert alert-warning">{{ message }}</div>{% endif %}
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>班级</th>
+                        <th>学号</th>
+                        <th>考场</th>
+                        <th>姓名</th>
+                        <th>座位号</th>
+                        <th>考试时间</th>
+                        <th>签到状态</th>
+{#                        <th>人脸库注册状态</th>#}
+                        <th>签到时间</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for name in names %}
+                        <tr>
+                            <td>{{ name.Class_Name }}</td>
+                            <td>{{ name.User_Id }}</td>
+                            <td>{{ name.Exam_Site }}</td>
+                            <td>{{ name.User_Name }}</td>
+                            <td>{{ name.Exam_Number }}</td>
+                            <td>{{ name.Exam_Time }}</td>
+                            <td>{{ name.Is_Attend }}</td>
+{#                            <td>{{ name.Is_Add_Face }}</td>#}
+                            <td>{{ name.Attend_Time }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div><!-- /.col-lg-6 -->
+
+            <div class="col-lg-4">
+                <div class="row"><div class="col-md-push-10"><video></video></div></div>
+                <div class="row">
+                    <form class='form-signin' action="/_exam/sign_in/" method="post">
+                        {% csrf_token %}
+                        <input type="hidden" id="Face" name="Face">
+                        <div class="btn-group btn-group-justified"  style="width: 640px" role="group" aria-label="...">
+                            <div class="btn-group" role="group">
+                                <button type="button" id="snap" class="btn btn-default btn-lg">拍照</button>
+                            </div>
+                            <div class="btn-group" role="group">
+                                <button type="submit" class="btn btn-primary btn-lg">提交照片</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="row"><canvas  width="650" height="480"></canvas></div>
+            </div><!-- /.col-lg-4 -->
+        </div>
+
+    </div> <!-- /container -->
+
+{% endblock %}

@@ -47,8 +47,8 @@ else if (navigator.getMedia) {
 
 // 截取图像
 snap.addEventListener('click', function () {
-    context.drawImage(video, 0, 0, 400,300);
-    document.getElementById("Face").value = canvas.toDataURL('image/PNG')
+    context.drawImage(video, 0, 0, 640,480);
+    document.getElementById("Face").value = canvas.toDataURL('image/JPEG')
 }, false);
 
 // 关闭摄像头

@@ -1,0 +1,70 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>人脸识别签到系统</title>
+    <!-- Bootstrap core CSS -->
+{#    #}
+{#    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">#}
+    <link href="{% static 'bootstrap-3.3.7-dist/css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="{% static 'css/cover.css' %}" rel="stylesheet">
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+<div class="site-wrapper">
+    <div class="site-wrapper-inner">
+        <div class="cover-container">
+            <div class="masthead clearfix">
+                <div class="inner">
+                    <h2 class="masthead-brand">人脸识别签到系统 </h2>
+                    <nav >
+                        <ul class="nav masthead-nav ">
+                            <li class="active"><a href="/index/">INDEX </a></li>
+                            {% if request.session.is_exam %}
+                                <li><a href="/_exam/sign_in">学生签到</a></li>
+                            {% endif %}
+                            {% if request.session.is_teacher %}
+                                <li><a href="/_teacher/index">教师管理</a></li>
+                            {% endif %}
+                            {% if None == request.session.is_login %}
+                             <li ><a href="/_exam/exam_login">LOGIN </a></li>
+                             {% endif %}
+                            <li ><a href="#">ABOUT </a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <div class="inner cover">
+                <h1 class="cover-heading">You are being given a fresh start, but it's up to you to follow your
+                    dream.</h1>
+                <p class="lead">求真、立德、勤奋、创新.</p>
+                <p class="lead">
+                    <a href="http://www.btbu.edu.cn/" class="btn btn-lg btn-default">Learn more</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+    <script src="{% static 'bootstrap-3.3.7-dist/js/bootstrap.min.js' %}"></script>
+
+</body>
+</html>

@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %}教师登陆{% endblock %}
+{% block css %}
+    <link href="{% static 'css/exam.css' %}" rel="stylesheet"/>{% endblock %}
+{% block content %}
+
+        {% if message %}
+            <div class="alert alert-warning">{{ message }}</div>
+        {% endif %}
+        <form class="form-signin" action="/_teacher/teacher_login/" method="post">
+            {% csrf_token %}
+            <h2 class="form-signin-heading" align="center">教 师 登 陆</h2>
+{#            <div class="input-group">#}
+{#                <span class="input-group-addon" id="basic-addon1">账户</span>#}
+{#                <input type="text" id="Exam_Name" name="Exam_Name" class="form-control" placeholder="考场 / 教师"#}
+{#                       required="" autofocus="">#}
+{#            </div>#}
+{#            <div class="input-group ">#}
+{#                <span class="input-group-addon" id="basic-addon1">密码</span>#}
+{#                <input type="password" id="Exam_passed" name="Exam_passed" class="form-control" placeholder="密码" required="" >#}
+{#            </div>#}
+            <label for="Exam_Name" class="sr-only"> </label>
+            <input type="text" id="Teacher_Name" name="Teacher_Name" class="form-control" placeholder="教师/测试T" required="" autofocus="">
+            <label for="inputPassword" class="sr-only">Password</label>
+            <input type="password" id="Teacher_Password" name="Teacher_Password" class="form-control" placeholder="密码/测试T" required="">
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" value="remember-me"> 记住账号
+                </label>
+            </div>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">登陆</button>
+        </form>
+
+
+
+{% endblock %}
+
+

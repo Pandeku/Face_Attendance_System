@@ -24,9 +24,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'y@4)85lk6z9mbayy-gs0!=t+2^vz+u&n(vti-i@aa2y(yqc(^x'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
+
 
 # Application definition
 
@@ -37,7 +38,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'login_register_attend',
+    '_index',
+    '_exam',
+    '_search',
+    '_teacher',
     'sslserver',
 ]
 
@@ -90,8 +94,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',  # 数据库引擎
         'NAME': 'django_stu_info',  # 数据库名，先前创建的
-        'USER': 'liuqingtong',  # 用户名，可以自己创建用户
-        'PASSWORD': '1504030521Lqt?',  # 密码
+        'USER': 'pandeku',  # 用户名，可以自己创建用户
+        'PASSWORD': 'pandeku',  # 密码
         'HOST': 'localhost',
         # 'HOST': '192.168.69.230',  # mysql服务所在的主机ip
         'PORT': '3306',  # mysql服务端口
@@ -134,12 +138,15 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
+# # 本地调试  加入下面的配置
+# STATICFILES_DIRS = [
+#     os.path.join(BASE_DIR, "static"),
+# ]
 
 
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static"),
-]
+#网站部署 加入下面的配置
 
-# STATIC_URL = '/static/'
-# # 加入下面的配置
-# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+
+

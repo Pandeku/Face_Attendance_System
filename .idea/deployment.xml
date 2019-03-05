@@ -5,7 +5,7 @@
       <paths name="MyTencentWebSite">
         <serverdata>
           <mappings>
-            <mapping deploy="/home/ubuntu/www" local="$PROJECT_DIR$" web="/" />
+            <mapping deploy="/home/ubuntu/www_web" local="$PROJECT_DIR$" web="/" />
           </mappings>
         </serverdata>
       </paths>

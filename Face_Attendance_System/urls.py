@@ -14,22 +14,21 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.conf.urls import url
-from django.contrib import admin
-from login_register_attend import views
 
+from django.contrib import admin
+from django.conf.urls import include, url
+from _index import views
 urlpatterns = [
+    url(r'^_exam/', include('_exam.urls')),
+    url(r'^_search/', include('_search.urls')),
+    url(r'^_teacher/', include('_teacher.urls')),
     url(r'^admin/', admin.site.urls),
     url(r'^index/', views.index),
-    url(r'^login/', views.login),
-    url(r'^register/', views.register),
     url(r'^logout/', views.logout),
-    url(r'^exam/', views.exam),
-    url(r'^search/', views.search),
-    url(r'^update/', views.update),
-    url(r'^test/', views.test),
+    url(r'^clean/', views.logout),
+    # url(r'^update/', views.update),
+    # url(r'^test/', views.test),
 ]
-
 handler400 = views.bad_request
 handler403 = views.permission_denied
 handler404 = views.page_not_found

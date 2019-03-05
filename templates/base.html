@@ -1,75 +1,103 @@
 {% load staticfiles %}
 <!DOCTYPE html>
-<html lang="zh-CN">
-  <head>
-    <meta charset="utf-8">
+<!-- saved from url=(0039)https://v3.bootcss.com/examples/signin/ -->
+<html lang="zh-CN"><head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
-    <title>{% block title %}base{% endblock %}</title>
-
-    <!-- Bootstrap -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="https://v3.bootcss.com/favicon.ico">
+    <title>
+        {% block title %}
+            base
+        {% endblock %}
+    </title>
+	<!-- Bootstrap -->
     <link href="{% static 'bootstrap-3.3.7-dist/css/bootstrap.min.css' %}" rel="stylesheet">
-
+    <!-- Custom styles for this template -->
+	<link href="{% static 'css/jump.css' %}" rel="stylesheet">
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
       <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
       <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-    {% block css %}{% endblock %}
+	{% block css %}
+    {% endblock %}
   </head>
-  <body class="hold-transition login-page">
-    <nav class="navbar navbar-default">
-      <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#my-nav" aria-expanded="false">
-            <span class="sr-only">切换导航条</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#"> 人脸识别签到系统 Beta版</a>
-        </div>
+  <body>
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+          <div class="navbar-header"><a class="navbar-brand" href="/index/">首 页</a></div>
 
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="my-nav">
-          <ul class="nav navbar-nav">
-            <li class="active"><a href="/index/">考场学生信息</a></li>
-          </ul>
           <ul class="nav navbar-nav navbar-right">
-              {% if request.session.is_login %}
-                  <li><a href="#">当前考场：{{ request.session.exam_id }}</a></li>
-                   <li><a href="/update/">删除个人人脸库</a></li>
-                  <li><a href="/search/">学生信息查询</a></li>
-                  <li><a href="/login/">学生人脸签到</a></li>
-                  <li><a href="/register/">学生人脸注册</a></li>
-                  <li><a href="/logout/">更换考场</a></li>
-              {% else %}
-                  <li><a href="/exam/">考场登陆<13_201,btu></a></li>
-                  <li><a href="/test/">人脸签到测试</a></li>
-                  <li><a href="/search/">学生信息查询</a></li>
-                  <li><a href="/register/">学生人脸注册</a></li>
+              {% if request.session.is_exam %}
+                  <div class="btn-group">
+                    <button class="btn btn-default btn-lg dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span class="glyphicon glyphicon-align-justify" aria-hidden="true" >
+                        </span> 考场:{{ request.session.exam_id }}
+                    </button>
+                      <ul class="dropdown-menu">
+                          <a href="/_exam/all_students" class="list-group-item">考场考生名单</a>
+                          <a href="/_teacher/register" class="list-group-item">采集人脸图像</a>
+                          <a href="/_exam/sign_in" class="list-group-item">学生签到</a>
+                          <a href="/_search/search" class="list-group-item">学生查询</a>
+                          <a href="/logout/" class="list-group-item">退出系统</a>
+                      </ul>
+                  </div>
+              {% endif %}
+
+              {% if request.session.is_teacher %}
+                  <div class="btn-group">
+                    <button class="btn btn-default btn-lg dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span class="glyphicon glyphicon-align-justify" aria-hidden="true" ></span>当前教师:{{ request.session.teacher }}
+                    </button>
+                      <ul class="dropdown-menu">
+                          <a href="/_teacher/add_student" class="list-group-item">添加学生</a>
+                          <a href="/_teacher/index" class="list-group-item">教师首页</a>
+                          <a href="/_search/search" class="list-group-item">学生查询</a>
+                          <a href="/_teacher/register" class="list-group-item">采集人脸图像</a>
+                          <a href="/_teacher/delete_student" class="list-group-item">删除学生基本信息</a>
+                          <a href="/_teacher/delete_face" class="list-group-item">删除学生人脸图像</a>
+                          <a href="/logout/" class="list-group-item">退出系统</a>
+                      </ul>
+                  </div>
               {% endif %}
           </ul>
-        </div><!-- /.navbar-collapse -->
-      </div><!-- /.container-fluid -->
+
+        <div id="navbar" class="navbar-collapse collapse">
+             {% if request.session.is_login == flase %}
+                 <div class="navbar-form navbar-right btn-group">
+                    <button class="btn btn-default btn-lg dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span class="glyphicon glyphicon-align-justify" aria-hidden="true" >
+                        </span>登陆与查询菜单
+                    </button>
+                      <ul class="dropdown-menu">
+                          <a href="/_teacher/teacher_login" class="list-group-item">教师登陆</a>
+                          <a href="/_exam/exam_login" class="list-group-item">考场登陆</a>
+                          <a href="/_search/search" class="list-group-item">学生查询</a>
+                           <a href="/_teacher/register" class="list-group-item">采集人脸图像</a>
+                          <a href="/logout/" class="list-group-item">退出系统</a>
+                      </ul>
+                  </div>
+            {% endif %}
+        </div><!--/.navbar-collapse -->
+      </div>
     </nav>
+
 
     {% block content %}
 
     {% endblock %}
 
 
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+      <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="{% static 'js/jquery-3.2.1.js' %}"></script>
-
-     <script src="{% static 'js/camera.js' %}"></script>}
-
+    <script src="{% static 'js/camera.js' %}"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="{% static 'bootstrap-3.3.7-dist/js/bootstrap.min.js' %}"></script>
-    <script type="text/javascript" src="jquery.js"></script>
 
-  </body>
-</html>
+</body></html>
