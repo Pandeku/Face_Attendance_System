@@ -7,7 +7,7 @@ cffi==1.11.5
 chardet==3.0.4
 cryptography==2.2.2
 cycler==0.10.0
-Django==1.11.6
+Django==1.11.29
 django-extensions==2.0.6
 django-sslserver==0.20
 django-werkzeug-debugger-runserver==0.3.1
