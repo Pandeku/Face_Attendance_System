@@ -12,7 +12,7 @@ django-extensions==2.0.6
 django-sslserver==0.20
 django-werkzeug-debugger-runserver==0.3.1
 enum34==1.1.6
-html5lib==0.9999999
+html5lib==0.99999999
 idna==2.6
 ipaddress==1.0.19
 mysql-connector-python==8.0.6
