@@ -15,7 +15,7 @@ enum34==1.1.6
 html5lib==0.9999999
 idna==2.6
 ipaddress==1.0.19
-mysql-connector-python==8.0.6
+mysql-connector-python==8.0.14
 protobuf==3.4.0
 pycparser==2.18
 Pygments==2.2.0
